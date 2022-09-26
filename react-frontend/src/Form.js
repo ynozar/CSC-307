@@ -23,7 +23,7 @@ function handleChange(event) {
     setPerson({name: '', job: ''});
   }
   return (
-    <form>
+    <form> 
       <label htmlFor="name">Name</label>
       <input
         type="text"
