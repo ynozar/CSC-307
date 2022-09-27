@@ -54,6 +54,28 @@ function addUser(user){
 }
 
 
+app.delete('/users/:id', (req, res) => {
+    const id = req.params['id']; //or req.params.id
+    let result = findUserById(id);
+    if (result === undefined || result.length == 0)
+        res.status(404).send('Resource not found.');
+    else {
+        var i=0;
+        while(i<users['users_list'].length){
+            if (users['users_list'][i].id==id){
+                users['users_list'].splice(i, 1);
+            }
+            else{
+                i++;
+            }
+            
+            
+
+        }
+        result = {users_list: result};
+        res.send(result);
+    }
+});
 
 const users = { 
     users_list :
