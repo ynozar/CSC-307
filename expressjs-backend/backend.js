@@ -1,3 +1,4 @@
+const e = require('express');
 const express = require('express');
 const app = express();
 const port = 5000;
@@ -13,7 +14,15 @@ app.listen(port, () => {
 });      
 app.get('/users', (req, res) => {
     const name = req.query.name;
-    if (name != undefined){
+    const job =req.query.job;
+    if (name != undefined&&job!=undefined){
+        console.log("R")
+        let result = findUserByNameAndJob(name,job);
+        result = {users_list: result};
+        console.log(result)
+        res.send(result);
+    }
+    else if (name != undefined){
         let result = findUserByName(name);
         result = {users_list: result};
         res.send(result);
@@ -27,6 +36,9 @@ const findUserByName = (name) => {
     return users['users_list'].filter( (user) => user['name'] === name); 
 }
 
+const findUserByNameAndJob = (name,job) => { 
+    return users['users_list'].filter( (user) => user['job'] === job && user['name'] === name); 
+}
 app.get('/users/:id', (req, res) => {
     const id = req.params['id']; //or req.params.id
     let result = findUserById(id);
