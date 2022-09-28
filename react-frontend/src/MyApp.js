@@ -36,15 +36,22 @@ function MyApp() {
      }
      
       function removeOneCharacter (index) {
+        const toRemove = characters.filter((character, i) => {
+            return i == index
+          });
+        axios.delete('http://localhost:5000/users/'+toRemove[0].id)
         const updated = characters.filter((character, i) => {
             return i !== index
           });
+        
           setCharacters(updated);
         }
         function updateList(person) { 
             makePostCall(person).then( result => {
-            if (result && result.status === 200)
-               setCharacters([...characters, person] );
+            if (result && result.status === 201)
+            console.log(result)
+            console.log("result.data")
+               setCharacters([...characters, result.data] );
             });
          }
             

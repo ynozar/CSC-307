@@ -58,14 +58,25 @@ function findUserById(id) {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
+    userToAdd.id=generateID();
+    //console.log(userToAdd)
     addUser(userToAdd);
-    res.status(200).end();
+    res.status(201).send(userToAdd).end();
 });
 
 function addUser(user){
     users['users_list'].push(user);
 }
-
+function generateID(){
+    const id=randomChar()+randomChar()+randomChar()+randomNum()+randomNum()+randomNum()
+    return id
+}
+function randomChar(){
+    return String.fromCharCode(26*Math.random()+97)
+}
+function randomNum(){
+    return Math.floor(10*Math.random()).toString()
+}
 
 app.delete('/users/:id', (req, res) => {
     const id = req.params['id']; //or req.params.id
