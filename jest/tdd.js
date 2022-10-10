@@ -50,14 +50,7 @@ class Portfolio {
 
 
 
-  function sum(){ //DELETE
-
-    return new Portfolio();
-
-  }
 
 
 
 exports.Portfolio = Portfolio;
-
-exports.sum = sum;

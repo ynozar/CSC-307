@@ -1,17 +1,18 @@
 const { expect } = require('expect');
+const { proto } = require('once');
 const myFunctions = require('./tdd.js');
 
 
-test('Testing sum -- success', () => {
-    const target = new myFunctions.Portfolio();
-    const result = myFunctions.sum();
-    expect(target).toStrictEqual(result);
+test('Testing create new portfolio -- success', () => {
+    const target = {numShares:[],tickers:[]};
+    const result = new myFunctions.Portfolio();
+    expect(target).toEqual(expect.objectContaining(result));
   });
 
 test('Testing is empty -- success', () => {
     const target = true;
     const result = new myFunctions.Portfolio();
-    expect(target).toStrictEqual(result.isEmpty());
+    expect(target).toEqual(result.isEmpty());
   });
 
 
