@@ -44,6 +44,14 @@ app.post('/users', async (req, res) => {
         res.status(500).end();
 });
 
+app.delete('/users/:id', async (req, res) => {
+    const id = req.params['id']; //or req.params.id
+    let result = await userServices.findByIdAndDelete(id)
+    
+        result = "deleted "+ result;
+        res.send(result);
+    
+});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

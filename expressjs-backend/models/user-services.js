@@ -17,6 +17,8 @@ async function getUsers(name, job) {
     result = await findUserByName(name);
   } else if (job && !name) {
     result = await findUserByJob(job);
+  } else if (job && name) {
+    result = await findUserByNameAndJob(name,job);
   }
   return result;
 }
@@ -48,7 +50,16 @@ async function findUserByName(name) {
 async function findUserByJob(job) {
   return await userModel.find({ job: job });
 }
+async function findUserByNameAndJob(name,job){
+  return await userModel.find({name: name},{ job: job });
+}
 
+async function findByIdAndDelete(id){
+  return await userModel.findByIdAndDelete(id);
+}
+
+exports.findByIdAndDelete = findByIdAndDelete;
 exports.getUsers = getUsers;
 exports.findUserById = findUserById;
 exports.addUser = addUser;
+
